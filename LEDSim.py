@@ -5,6 +5,20 @@ from kivy.uix.widget import Widget
 from kivy.graphics import Color, Ellipse, Rectangle, Line
 from kivy.clock import Clock
 
+class ColorFill(Widget):
+	def __init__(self, **kwargs):
+		super(Widget, self).__init__(**kwargs)
+
+		with self.canvas:
+			Color(0.4, 0.4, 1.0, 1.0)
+			self.bg_rect = Rectangle(pos = self.pos, size = self.size)
+		return
+
+	def redraw(self):
+		self.bg_rect.size = self.size
+		self.bg_rect.pos = self.pos
+		return
+
 class LEDSim(App):
 	def build(self):
 		self.root = layout = GridLayout()
