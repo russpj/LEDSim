@@ -43,6 +43,8 @@ class LEDSim(App):
 		gridWidth = squareSide*self.lengthStrips
 		gridHeight = squareSide*self.numStrips
 		self.grid.size_hint_max = (gridWidth, gridHeight)
+		self.grid.pos_hint = {'center_x': .5, 'center_y': 0.5}
+		return
 
 if __name__ == '__main__':
 	LEDSim().run()
