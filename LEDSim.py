@@ -4,7 +4,7 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.widget import Widget
 from kivy.uix.label import Label
-from kivy.graphics import Color, Ellipse
+from kivy.graphics import Color
 from kivy.clock import Clock
 from ColorFill import ColorFill
 
