@@ -2,9 +2,6 @@
 #
 # ColorFill is a Kivy Widget that supports a solid fill color
 
-from kivy.app import App
-from kivy.uix.gridlayout import GridLayout
-from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.widget import Widget
 from kivy.graphics import Color, Rectangle
 
@@ -27,6 +24,10 @@ class ColorFill(Widget):
 			self.bg_rect = Rectangle(pos = self.pos, size = self.size)
 		return
 
+import colorsys
+from kivy.app import App
+from kivy.uix.gridlayout import GridLayout
+from kivy.uix.floatlayout import FloatLayout
 
 class Sample(App):
 	def build(self):
@@ -38,20 +39,18 @@ class Sample(App):
 		self.grid = GridLayout(rows = self.numStrips, pos_hint = {'center_x': .5, 'center_y': 0.5})
 		layout.add_widget(self.grid)
 		self.LEDs = []
+		hue = 0.0
 		for stripNum in range(self.numStrips):
 			strip = []
 			for LEDLocation in range(self.lengthStrips):
 				LED = ColorFill()
 				brightness = LEDLocation / self.lengthStrips
-				if stripNum == 0:
-					LED.setColor(1.0, brightness, brightness, 1.0)
-				if stripNum == 1:
-					LED.setColor(brightness, 1.0, brightness, 1.0)
-				if stripNum == 2:
-					LED.setColor(brightness, brightness, 1.0, 1.0)
+				rgb = colorsys.hsv_to_rgb(hue, 1.0, brightness)
+				LED.setColor(rgb[0], rgb[1], rgb[2], 1.0)
 				self.grid.add_widget(LED)
 				strip.append(LED)
 			self.LEDs.append(strip)
+			hue += 1/3
 
 		layout.bind(size=self.update_layout)
 			
