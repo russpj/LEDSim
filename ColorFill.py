@@ -22,7 +22,7 @@ class ColorFill(Widget):
 
 	def setColor(self, red, green, blue, alpha):
 		self.canvas.clear()
-		with self.canvas.before:
+		with self.canvas:
 			Color(red, green, blue, alpha)
 			self.bg_rect = Rectangle(pos = self.pos, size = self.size)
 		return
