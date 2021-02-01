@@ -32,7 +32,7 @@ class Sample(App):
 	def build(self):
 		self.root = layout = FloatLayout()
 
-		self.numStrips = 1
+		self.numStrips = 3
 		self.lengthStrips = 20
 		
 		self.grid = GridLayout(rows = self.numStrips, pos_hint = {'center_x': .5, 'center_y': 0.5})
@@ -43,7 +43,12 @@ class Sample(App):
 			for LEDLocation in range(self.lengthStrips):
 				LED = ColorFill()
 				brightness = LEDLocation / self.lengthStrips
-				LED.setColor(brightness, brightness, 1.0, 1.0)
+				if stripNum == 0:
+					LED.setColor(1.0, brightness, brightness, 1.0)
+				if stripNum == 1:
+					LED.setColor(brightness, 1.0, brightness, 1.0)
+				if stripNum == 2:
+					LED.setColor(brightness, brightness, 1.0, 1.0)
 				self.grid.add_widget(LED)
 				strip.append(LED)
 			self.LEDs.append(strip)
@@ -57,7 +62,6 @@ class Sample(App):
 		gridWidth = squareSide*self.lengthStrips
 		gridHeight = squareSide*self.numStrips
 		self.grid.size_hint_max = (gridWidth, gridHeight)
-		# self.grid.pos_hint = {'center_x': .5, 'center_y': 0.5}
 		return
 
 	
