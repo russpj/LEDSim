@@ -7,6 +7,7 @@ from kivy.graphics import Color
 from kivy.clock import Clock
 from ColorFill import ColorFill
 from Breathe import Breathe
+from Ball import Ball
 
 class LEDSim(App):
 	def build(self):
@@ -26,7 +27,7 @@ class LEDSim(App):
 				LED.setColor(0.0, 0.0, 0.0, 1.0)
 				self.grid.add_widget(LED)
 				strip.append(LED)
-			self.effects.append(Breathe(strip, hue=2/3, duration=2.0))
+			self.effects.append(Ball(strip))
 
 		layout.bind(size=self.update_layout)
 
