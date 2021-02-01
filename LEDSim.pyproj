@@ -21,6 +21,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Breathe.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ColorFill.py" />
     <Compile Include="LEDSim.py" />
   </ItemGroup>
