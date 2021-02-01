@@ -17,21 +17,19 @@ class LEDSim(App):
 		
 		self.grid = GridLayout(rows = self.numStrips, pos_hint = {'center_x': .5, 'center_y': 0.5})
 		layout.add_widget(self.grid)
-		self.LEDs = []
+
+		self.effects = []
 		for stripNum in range(self.numStrips):
 			strip = []
 			for LEDLocation in range(self.lengthStrips):
 				LED = ColorFill()
-				brightness = LEDLocation / self.lengthStrips
-				LED.setColor(brightness, brightness, 1.0, 1.0)
+				LED.setColor(0.0, 0.0, 0.0, 1.0)
 				self.grid.add_widget(LED)
 				strip.append(LED)
-			self.LEDs.append(strip)
+			self.effects.append(Breathe(strip))
 
 		layout.bind(size=self.update_layout)
 
-		self.breathe = Breathe(self.LEDs[0])
-			
 		return layout
 
 	def update_layout(self, instance, value):
