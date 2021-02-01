@@ -7,25 +7,27 @@ from kivy.graphics import Color, Ellipse, Rectangle, Line
 from kivy.clock import Clock
 from ColorFill import ColorFill
 
+numStrips = 1
+lengthStrips = 20
+
 class LEDSim(App):
 	def build(self):
-		self.root = layout = GridLayout(cols=1)
-#		layout.bind(size=self._update_rect, pos=self._update_rect)
-		LED = ColorFill()
-		LED.setColor(0.4, 0.4, 1.0, 1.0)
-		layout.add_widget(LED)
-
-#		with layout.canvas.before:
-#			Color(0.1, .9, 0.1, 1)  # green; colors range from 0-1 not 0-255
-#			self.rect = Rectangle(size=layout.size, pos=layout.pos)
+		self.root = layout = FloatLayout()
+		
+		self.grid = GridLayout(rows = numStrips)
+		layout.add_widget(self.grid)
+		self.LEDs = []
+		for stripNum in range(numStrips):
+			strip = []
+			for LEDLocation in range(lengthStrips):
+				LED = ColorFill()
+				brightness = LEDLocation / lengthStrips
+				LED.setColor(brightness, brightness, 1.0, 1.0)
+				self.grid.add_widget(LED)
+				strip.append(LED)
+			self.LEDs.append(strip)
 			
 		return layout
-
-#	def _update_rect(self, instance, value):
-#		self.root.canvas.clear()
-#		self.rect.pos = [instance.pos[0], instance.size[1]/2]
-#		size = [instance.size[0], instance.size[1]/2]
-#		self.rect.size = size
 
 	
 if __name__ == '__main__':
