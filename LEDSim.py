@@ -8,20 +8,14 @@ from kivy.clock import Clock
 from ColorFill import ColorFill
 
 
-class MainLayout(FloatLayout):
-	def __init__(self, **kwargs):
-		super(MainLayout, self).__init__(**kwargs)
-
-
-
 class LEDSim(App):
 	def build(self):
-		self.root = layout = MainLayout()
+		self.root = layout = FloatLayout()
 
 		self.numStrips = 1
 		self.lengthStrips = 20
 		
-		self.grid = GridLayout(rows = self.numStrips)
+		self.grid = GridLayout(rows = self.numStrips, pos_hint = {'center_x': .5, 'center_y': 0.5})
 		layout.add_widget(self.grid)
 		self.LEDs = []
 		for stripNum in range(self.numStrips):
@@ -43,7 +37,6 @@ class LEDSim(App):
 		gridWidth = squareSide*self.lengthStrips
 		gridHeight = squareSide*self.numStrips
 		self.grid.size_hint_max = (gridWidth, gridHeight)
-		self.grid.pos_hint = {'center_x': .5, 'center_y': 0.5}
 		return
 
 if __name__ == '__main__':
