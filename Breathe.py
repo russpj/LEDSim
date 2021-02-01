@@ -6,13 +6,14 @@ import colorsys
 from kivy.clock import Clock
 
 class Breathe:
-	def __init__(self, strip):
+	def __init__(self, strip, hue=0.0, saturation = 1.0, duration = 4.0):
 		self.strip = strip
-		self.hue = 0.67
-		self.saturation = 1.0
+		self.hue = hue
+		self.saturation = saturation
 		self.brightness = 0.0
-		self.brightenAmount = 0.1
-		Clock.schedule_interval(self.brighten, 1/10.0)
+		framerate = 15
+		self.brightenAmount = 2/(framerate*duration)
+		Clock.schedule_interval(self.brighten, 1/framerate)
 		return
 
 	def brighten(self, dt):
@@ -39,13 +40,14 @@ class Sample(App):
 	def build(self):
 		self.root = layout = FloatLayout()
 
-		self.numStrips = 1
+		self.numStrips = 3
 		self.lengthStrips = 20
 		
 		self.grid = GridLayout(rows = self.numStrips, pos_hint = {'center_x': .5, 'center_y': 0.5})
 		layout.add_widget(self.grid)
 
 		self.effects = []
+		hue = 1/6
 		for stripNum in range(self.numStrips):
 			strip = []
 			for LEDLocation in range(self.lengthStrips):
@@ -53,7 +55,8 @@ class Sample(App):
 				LED.setColor(0.0, 0.0, 0.0, 1.0)
 				self.grid.add_widget(LED)
 				strip.append(LED)
-			self.effects.append(Breathe(strip))
+			self.effects.append(Breathe(strip, hue=hue, duration=3.0*(1/3+hue)))
+			hue += 1/self.numStrips
 
 		layout.bind(size=self.update_layout)
 
