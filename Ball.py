@@ -7,7 +7,7 @@ from kivy.clock import Clock
 
 
 class Ball:
-	def __init__(self, strip, duration=4.0, hue=0.0, reflect=False):
+	def __init__(self, strip, duration=4.0, hue=0.0, reflect=False, fade=1.0):
 		self.strip = strip
 		self.position = 0
 		self.hue = hue
