@@ -28,7 +28,7 @@ class Ball:
 		LEDPosition = int(self.position*len(self.strip))
 		if LEDPosition >= 0 and LEDPosition < len(self.strip):
 			rgb = colorsys.hsv_to_rgb(self.hue, 1.0, 1.0)
-			self.strip[LEDPosition].setColor(rgb[0], rgb[1], rgb[2], 1.0)
+			self.strip[LEDPosition].setColor(rgb[0], rgb[1], rgb[2])
 
 		self.position += self.velocity
 		if self.reflect:

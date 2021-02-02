@@ -38,6 +38,17 @@ class ColorFill(Widget):
 		hsv = colorsys.rgb_to_hsv(self.red, self.green, self.blue)
 		value = max(0.0, hsv[2]-reduction)
 		self.setHSVColor(hsv[0], hsv[1], value)
+		return
+
+	def blendScreen(self, red, green, blue, alpha=1.0):
+		#red = 1 - (1-red)*(1-self.red)
+		#green = 1 - (1-green)*(1-self.green)
+		#blue = 1 - (1-blue)*(1-self.blue)
+		red = min(1.0, red+self.red)
+		green = min(1.0, green+self.green)
+		blue = min(1.0, blue+self.blue)
+		self.setColor(red, green, blue, alpha)
+		return
 
 import colorsys
 from kivy.app import App

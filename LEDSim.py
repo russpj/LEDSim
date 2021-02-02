@@ -27,7 +27,7 @@ class LEDSim(App):
 				LED.setColor(0.0, 0.0, 0.0, 1.0)
 				self.grid.add_widget(LED)
 				strip.append(LED)
-			self.effects.append(Ball(strip, reflect=True))
+			self.effects.append(Ball(strip, hue=0.71, reflect=True, fade=0.02))
 
 		layout.bind(size=self.update_layout)
 
