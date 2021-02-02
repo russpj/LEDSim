@@ -12,6 +12,7 @@ class Ball:
 		self.position = 0
 		self.hue = hue
 		self.reflect = reflect
+		self.fade=fade
 		framerate = 15
 		self.velocity = 1.0/framerate/duration
 
@@ -22,7 +23,7 @@ class Ball:
 	def move(self, dt):
 		# clear strip
 		for LED in self.strip:
-			LED.setColor(0.0, 0.0, 0.0, 1.0)
+			LED.reduceValue(self.fade)
 
 		LEDPosition = int(self.position*len(self.strip))
 		if LEDPosition >= 0 and LEDPosition < len(self.strip):
