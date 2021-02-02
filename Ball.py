@@ -30,3 +30,10 @@ class Ball:
 			self.strip[LEDPosition].setColor(rgb[0], rgb[1], rgb[2], 1.0)
 
 		self.position += self.velocity
+		if self.reflect:
+			if self.position >= 1.0:
+				self.velocity = -self.velocity
+				self.position += 2*self.velocity
+			if self.position < 0.0:
+				self.velocity = -self.velocity
+				self.position += 2*self.velocity
