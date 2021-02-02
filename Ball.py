@@ -7,13 +7,13 @@ from kivy.clock import Clock
 
 
 class Ball:
-	def __init__(self, strip):
-		duration = 1.0
+	def __init__(self, strip, duration=4.0, hue=0.0, reflect=False):
 		self.strip = strip
 		self.position = 0
-		self.hue = 2/3
+		self.hue = hue
+		self.reflect = reflect
 		framerate = 15
-		self.velocity = duration*len(strip)/framerate
+		self.velocity = 1.0/framerate/duration
 
 		Clock.schedule_interval(self.move, 1/framerate)
 
@@ -24,9 +24,9 @@ class Ball:
 		for LED in self.strip:
 			LED.setColor(0.0, 0.0, 0.0, 1.0)
 
-		LEDBall = int(self.position)
-		if LEDBall >= 0 and LEDBall < len(self.strip):
+		LEDPosition = int(self.position*len(self.strip))
+		if LEDPosition >= 0 and LEDPosition < len(self.strip):
 			rgb = colorsys.hsv_to_rgb(self.hue, 1.0, 1.0)
-			self.strip[LEDBall].setColor(rgb[0], rgb[1], rgb[2], 1.0)
+			self.strip[LEDPosition].setColor(rgb[0], rgb[1], rgb[2], 1.0)
 
 		self.position += self.velocity
