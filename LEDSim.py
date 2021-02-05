@@ -13,7 +13,7 @@ class LEDSim(App):
 	def build(self):
 		self.root = layout = FloatLayout()
 
-		self.numStrips = 1
+		self.numStrips = 3
 		self.lengthStrips = 20
 		
 		self.grid = GridLayout(rows = self.numStrips, pos_hint = {'center_x': .5, 'center_y': 0.5})
@@ -27,7 +27,13 @@ class LEDSim(App):
 				LED.setColor(0.0, 0.0, 0.0, 1.0)
 				self.grid.add_widget(LED)
 				strip.append(LED)
-			self.effects.append(Ball(strip, hue=0.71, reflect=True, fade=0.02))
+			
+			if stripNum == 0:
+				self.effects.append(Ball(strip, hue=0.82, reflect=True, fade=0.1, duration = 2.0))
+			if stripNum == 1:
+				self.effects.append(Breathe(strip, hue = 0.0, duration = 4.0))
+			if stripNum == 2:
+				self.effects.append(Ball(strip, hue=0.71, reflect=True, fade=0.06, duration = 4.0))
 
 		layout.bind(size=self.update_layout)
 
